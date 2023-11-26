@@ -1,6 +1,6 @@
 import './App.css';
 
-import ToyRobot from './components/pages/ToyRobot';
+import ToyRobot from './components/ToyRobotSimulator';
 
 function App() {
   return (
