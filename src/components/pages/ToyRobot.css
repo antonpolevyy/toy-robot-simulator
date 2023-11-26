@@ -1,0 +1,26 @@
+.toy-robot-page {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 1/3 and 2/3 of the available width */
+  gap: 20px; /* Add some gap between the elements */
+}
+
+.box {
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.one-third {
+  background-color: lightblue;
+}
+
+.two-thirds {
+  background-color: lightgreen;
+}
+
+@media (max-width: 767px) {
+  /* Adjust layout for smaller screens */
+  body {
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+  }
+}
