@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import RobotAvatar from './RobotAvatar';
 
 import { GRID_SIZE } from '../../constants/constValues';
 
@@ -30,6 +31,7 @@ function TabletopGrid({ position = { x: 0, y: 0 } }) {
         const isSelected = i === position.x && j === position.y;
         cells.push(
           <Cell key={`${i}-${j}`} selected={isSelected}>
+            {isSelected && <RobotAvatar />}
             {`${i}x${j}`}
           </Cell>
         );
