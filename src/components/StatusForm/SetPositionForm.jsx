@@ -29,7 +29,9 @@ const SetPositionButton = styled.button`
 `;
 
 const ErrorMessage = styled.div`
-  color: coral;
+  flex: 1;
+  color: red;
+  text-align: center;
 `;
 
 const SetPositionForm = ({ onSetPosition }) => {
@@ -65,24 +67,19 @@ const SetPositionForm = ({ onSetPosition }) => {
           type="number"
           placeholder="X"
           value={xCoord}
-          // onChange={(e) => setXCoord(e.target.value)}
           onChange={handleXChange}
         />
         <Input
           type="number"
           placeholder="Y"
           value={yCoord}
-          // onChange={(e) => setYCoord(e.target.value)}
           onChange={handleYChange}
         />
         <SetPositionButton onClick={handleSetPosition}>Set Position</SetPositionButton>
       </Row>
-      {errorMessage && (
-        <Row>
-          {/* <ErrorMessage name="y" component="div" className="error-message" /> */}
-          <ErrorMessage>{errorMessage}</ErrorMessage>
-        </Row>
-      )}
+      <Row>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </Row>
     </Container>
   );
 };
