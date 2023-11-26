@@ -1,11 +1,34 @@
 import { useState } from 'react';
 
-import './ToyRobot.css';
+import styled from 'styled-components';
 
 import Tabletop from '../Tabletop';
 import StatusForm from '../StatusForm';
 
 import { GRID_SIZE, MOVE_BUTTONS } from '../../constants/constValues';
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const TabletopWrapper = styled.div`
+  flex: 1;
+  width: 33.33%; /* 1/3 of the available width */
+  min-width: 200px; /* Set a minimum width if needed */
+  // background-color: lightgreen;
+  padding: 10px;
+  box-sizing: border-box;
+`;
+
+const StatusFormWrapper = styled.div`
+  flex: 2;
+  width: 66.66%; /* 2/3 of the available width */
+  min-width: 400px; /* Set a minimum width if needed */
+  // background-color: pink;
+  padding: 10px;
+  box-sizing: border-box;
+`;
 
 export default function ToyRobot() {
 
@@ -62,18 +85,18 @@ export default function ToyRobot() {
   return (
     <div>
       <h1>Toy Robot</h1>
-      <div className="toy-robot-page">
-        <div className="box one-third">
+      <Container>
+        <TabletopWrapper>
           <Tabletop position={currentPosition} />
-        </div>
-        <div className="box two-thirds">
+        </TabletopWrapper>
+        <StatusFormWrapper>
           <StatusForm 
             position={currentPosition}
             onDirectionClick={handleDirectionClick}
             onSetPosition={handleSetPosition}
           />
-        </div>
-      </div>
+        </StatusFormWrapper>
+      </Container>
     </div>
   );
 }
