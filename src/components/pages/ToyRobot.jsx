@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import Tabletop from '../Tabletop';
@@ -41,8 +40,8 @@ export default function ToyRobot() {
     return newCoordinate;
   };
 
-  const changeDirection = (direction) => {
-    console.log(`Move ${direction}`);
+  const changeDirection = useCallback((direction) => {
+    // console.log('changeDirection:', {direction});
     switch (direction) {
       case MOVE_BUTTONS.UP:
         setCurrentPosition((prevState) => ({
@@ -71,7 +70,28 @@ export default function ToyRobot() {
       default:
         console.log(`Stay put`);
     }
-  };
+  }, [currentPosition]);
+
+  const handleKeyPress = useCallback((event) => {
+    const pressedKey = event.key;
+    // console.log(`handleKeyPress: ${pressedKey}`);
+    switch (pressedKey) {
+      case 'ArrowUp':
+        changeDirection(MOVE_BUTTONS.UP);
+        break;
+      case 'ArrowDown':
+        changeDirection(MOVE_BUTTONS.DOWN);
+        break;
+      case 'ArrowRight':
+        changeDirection(MOVE_BUTTONS.RIGHT);
+        break;
+      case 'ArrowLeft':
+        changeDirection(MOVE_BUTTONS.LEFT);
+        break;
+      default:
+        console.log(`Ignoring pressed key 🫥`);
+    }
+  }, [changeDirection]);
 
   const handleDirectionClick = (direction) => {
     changeDirection(direction);
@@ -82,14 +102,23 @@ export default function ToyRobot() {
     setCurrentPosition(newPosition);
   };
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   return (
     <div>
       <h1>Toy Robot</h1>
       <Container>
-        <TabletopWrapper>
+        <TabletopWrapper data-testid="tabletop-wrapper">
           <Tabletop position={currentPosition} />
         </TabletopWrapper>
-        <StatusFormWrapper>
+        <StatusFormWrapper data-testid="status-form-wrapper">
           <StatusForm 
             position={currentPosition}
             onDirectionClick={handleDirectionClick}
