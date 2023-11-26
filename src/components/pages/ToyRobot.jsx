@@ -31,11 +31,28 @@ const StatusFormWrapper = styled.div`
 
 export default function ToyRobot() {
   const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
+  const [isInvalidMoveAnimation, setIsInvalidMoveAnimation] = useState(false);
+
+  const handleInvalidMove = () => {
+    // Trigger the animation by changing the state
+    setIsInvalidMoveAnimation(true);
+
+    // Reset the state after the animation duration
+    setTimeout(() => {
+      setIsInvalidMoveAnimation(false);
+    }, 600);
+  };
 
   const getStepPosition = (coordinate, step) => {
     const newCoordinate = coordinate + step;
-    if (newCoordinate < 0) return 0;
-    if (newCoordinate >= GRID_SIZE) return GRID_SIZE - 1;
+    if (newCoordinate < 0) {
+      handleInvalidMove();
+      return 0;
+    }
+    if (newCoordinate >= GRID_SIZE) {
+      handleInvalidMove();
+      return GRID_SIZE - 1;
+    }
     return newCoordinate;
   };
 
@@ -121,7 +138,10 @@ export default function ToyRobot() {
       <h1>Toy Robot</h1>
       <Container>
         <TabletopWrapper data-testid="tabletop-wrapper">
-          <Tabletop position={currentPosition} />
+          <Tabletop 
+            position={currentPosition} 
+            isInvalidMoveAnimation={isInvalidMoveAnimation}
+          />
         </TabletopWrapper>
         <StatusFormWrapper data-testid="status-form-wrapper">
           <StatusForm
