@@ -11,18 +11,17 @@ const Table = styled.div`
 
 const Cell = styled.div`
   height: 50px;
-  background-color: ${props => (props.selected ? 'orange' : 'white')};
+  background-color: ${(props) => (props.selected ? 'orange' : 'white')};
   border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
+  font-weight: ${(props) => (props.selected ? 'bold' : 'normal')};
 
   position: relative;
 `;
 
 function TabletopGrid({ position = { x: 0, y: 0 } }) {
-
   const renderTable = () => {
     const rows = [];
     for (let i = 0; i < GRID_SIZE; i++) {
@@ -33,7 +32,7 @@ function TabletopGrid({ position = { x: 0, y: 0 } }) {
           <Cell key={`${i}-${j}`} selected={isSelected}>
             {isSelected && <RobotAvatar />}
             {`${i}x${j}`}
-          </Cell>
+          </Cell>,
         );
       }
       rows.push(<div key={i}>{cells}</div>);
@@ -41,15 +40,11 @@ function TabletopGrid({ position = { x: 0, y: 0 } }) {
     return rows;
   };
 
-  return (
-    <Table>
-      {renderTable()}
-    </Table>
-  );
-};
+  return <Table>{renderTable()}</Table>;
+}
 
-TabletopGrid.defaultProps = { 
-  position: { x: 0, y: 0 }
+TabletopGrid.defaultProps = {
+  position: { x: 0, y: 0 },
 };
 
 export default TabletopGrid;

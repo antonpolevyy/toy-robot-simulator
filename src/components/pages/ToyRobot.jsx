@@ -30,7 +30,6 @@ const StatusFormWrapper = styled.div`
 `;
 
 export default function ToyRobot() {
-
   const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
 
   const getStepPosition = (coordinate, step) => {
@@ -40,58 +39,64 @@ export default function ToyRobot() {
     return newCoordinate;
   };
 
-  const changeDirection = useCallback((direction) => {
-    // console.log('changeDirection:', {direction});
-    switch (direction) {
-      case MOVE_BUTTONS.UP:
-        setCurrentPosition((prevState) => ({
-          x: prevState.x,
-          y: getStepPosition(currentPosition.y, -1)
-        }));
-        break;
-      case MOVE_BUTTONS.DOWN:
-        setCurrentPosition((prevState) => ({
-          x: prevState.x,
-          y: getStepPosition(currentPosition.y, 1)
-        }));
-        break;
-      case MOVE_BUTTONS.RIGHT:
-        setCurrentPosition((prevState) => ({
-          x: getStepPosition(currentPosition.x, 1),
-          y: prevState.y
-        }));
-        break;
-      case MOVE_BUTTONS.LEFT:
-        setCurrentPosition((prevState) => ({
-          x: getStepPosition(currentPosition.x, -1),
-          y: prevState.y
-        }));
-        break;
-      default:
-        console.log(`Stay put`);
-    }
-  }, [currentPosition]);
+  const changeDirection = useCallback(
+    (direction) => {
+      // console.log('changeDirection:', {direction});
+      switch (direction) {
+        case MOVE_BUTTONS.UP:
+          setCurrentPosition((prevState) => ({
+            x: prevState.x,
+            y: getStepPosition(currentPosition.y, -1),
+          }));
+          break;
+        case MOVE_BUTTONS.DOWN:
+          setCurrentPosition((prevState) => ({
+            x: prevState.x,
+            y: getStepPosition(currentPosition.y, 1),
+          }));
+          break;
+        case MOVE_BUTTONS.RIGHT:
+          setCurrentPosition((prevState) => ({
+            x: getStepPosition(currentPosition.x, 1),
+            y: prevState.y,
+          }));
+          break;
+        case MOVE_BUTTONS.LEFT:
+          setCurrentPosition((prevState) => ({
+            x: getStepPosition(currentPosition.x, -1),
+            y: prevState.y,
+          }));
+          break;
+        default:
+          console.log(`Stay put`);
+      }
+    },
+    [currentPosition],
+  );
 
-  const handleKeyPress = useCallback((event) => {
-    const pressedKey = event.key;
-    // console.log(`handleKeyPress: ${pressedKey}`);
-    switch (pressedKey) {
-      case 'ArrowUp':
-        changeDirection(MOVE_BUTTONS.UP);
-        break;
-      case 'ArrowDown':
-        changeDirection(MOVE_BUTTONS.DOWN);
-        break;
-      case 'ArrowRight':
-        changeDirection(MOVE_BUTTONS.RIGHT);
-        break;
-      case 'ArrowLeft':
-        changeDirection(MOVE_BUTTONS.LEFT);
-        break;
-      default:
-        console.log(`Ignoring pressed key 🫥`);
-    }
-  }, [changeDirection]);
+  const handleKeyPress = useCallback(
+    (event) => {
+      const pressedKey = event.key;
+      // console.log(`handleKeyPress: ${pressedKey}`);
+      switch (pressedKey) {
+        case 'ArrowUp':
+          changeDirection(MOVE_BUTTONS.UP);
+          break;
+        case 'ArrowDown':
+          changeDirection(MOVE_BUTTONS.DOWN);
+          break;
+        case 'ArrowRight':
+          changeDirection(MOVE_BUTTONS.RIGHT);
+          break;
+        case 'ArrowLeft':
+          changeDirection(MOVE_BUTTONS.LEFT);
+          break;
+        default:
+          console.log(`Ignoring pressed key 🫥`);
+      }
+    },
+    [changeDirection],
+  );
 
   const handleDirectionClick = (direction) => {
     changeDirection(direction);
@@ -119,7 +124,7 @@ export default function ToyRobot() {
           <Tabletop position={currentPosition} />
         </TabletopWrapper>
         <StatusFormWrapper data-testid="status-form-wrapper">
-          <StatusForm 
+          <StatusForm
             position={currentPosition}
             onDirectionClick={handleDirectionClick}
             onSetPosition={handleSetPosition}

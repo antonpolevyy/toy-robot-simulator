@@ -32,7 +32,6 @@ const ErrorMessage = styled.div`
   color: coral;
 `;
 
-
 const SetPositionForm = ({ onSetPosition }) => {
   const [xCoord, setXCoord] = useState('');
   const [yCoord, setYCoord] = useState('');
@@ -47,7 +46,7 @@ const SetPositionForm = ({ onSetPosition }) => {
     setYCoord(event.target.value);
     setErrorMessage('');
   };
-  
+
   const handleSetPosition = () => {
     const position = { x: Number(xCoord), y: Number(yCoord) };
 
@@ -86,10 +85,10 @@ const SetPositionForm = ({ onSetPosition }) => {
       )}
     </Container>
   );
-}
+};
 
-SetPositionForm.defaultProps = { 
-  onSetPosition: () => {}
+SetPositionForm.defaultProps = {
+  onSetPosition: () => {},
 };
 
 export default SetPositionForm;

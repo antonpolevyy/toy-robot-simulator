@@ -1,1 +1,1 @@
-export { default } from "./StatusForm";
+export { default } from './StatusForm';

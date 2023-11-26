@@ -50,5 +50,7 @@ test('SetPositionForm displays error message for out-of-range coordinates', () =
   fireEvent.click(screen.getByText('Set Position'));
 
   // Check if the error message is displayed
-  expect(screen.getByText('Error: Failed to set new position. Coordinates are out of range')).toBeInTheDocument();
+  expect(
+    screen.getByText('Error: Failed to set new position. Coordinates are out of range'),
+  ).toBeInTheDocument();
 });

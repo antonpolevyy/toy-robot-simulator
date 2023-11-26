@@ -34,11 +34,13 @@ const Button = styled.button`
 `;
 
 const StatusForm = ({ position, onDirectionClick, onSetPosition }) => {
-
   return (
     <Container>
       <Row>
-        <StatusField> Status: {position.x} x {position.y}</StatusField>
+        <StatusField>
+          {' '}
+          Status: {position.x} x {position.y}
+        </StatusField>
       </Row>
       <Row>
         <Button onClick={() => onDirectionClick(MOVE_BUTTONS.UP)}>{MOVE_BUTTONS.UP}</Button>
@@ -53,10 +55,10 @@ const StatusForm = ({ position, onDirectionClick, onSetPosition }) => {
   );
 };
 
-StatusForm.defaultProps = { 
+StatusForm.defaultProps = {
   position: { x: 0, y: 0 },
   onDirectionClick: () => {},
-  onSetPosition: () => {}
+  onSetPosition: () => {},
 };
 
 export default StatusForm;
