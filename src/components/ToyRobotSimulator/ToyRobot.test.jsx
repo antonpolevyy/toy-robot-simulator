@@ -8,7 +8,7 @@ test('ToyRobot component renders correctly', () => {
   render(<ToyRobot />);
 
   // Check if the main components are present
-  expect(screen.getByText('Toy Robot')).toBeInTheDocument();
+  expect(screen.getByText('Toy Robot Simulator')).toBeInTheDocument();
   expect(screen.getByTestId('tabletop-wrapper')).toBeInTheDocument();
   expect(screen.getByTestId('status-form-wrapper')).toBeInTheDocument();
 });

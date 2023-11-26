@@ -135,7 +135,7 @@ export default function ToyRobot() {
 
   return (
     <div>
-      <h1>Toy Robot</h1>
+      <h1>Toy Robot Simulator</h1>
       <Container>
         <TabletopWrapper data-testid="tabletop-wrapper">
           <Tabletop 
