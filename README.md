@@ -1,4 +1,4 @@
-# toy-bobot-simulator
+# toy-robot-simulator
 
 This project is a coding exercise described in the "Candidate Coding Exercise.pdf" file, stored in the root folder.
 
